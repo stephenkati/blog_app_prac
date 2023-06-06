@@ -7,15 +7,18 @@
 #
 
 require 'rubygems'
+require 'rubygems'
 
 m = Module.new do
   module_function
 
   def invoked_as_script?
     File.expand_path($PROGRAM_NAME) == File.expand_path(__FILE__)
+    File.expand_path($PROGRAM_NAME) == File.expand_path(__FILE__)
   end
 
   def env_var_version
+    ENV.fetch('BUNDLER_VERSION', nil)
     ENV.fetch('BUNDLER_VERSION', nil)
   end
 
@@ -27,11 +30,16 @@ m = Module.new do
     return unless invoked_as_script? # don't want to hijack other binstubs
     return unless 'update'.start_with?(ARGV.first || ' ') # must be running `bundle update`
 
+    return unless 'update'.start_with?(ARGV.first || ' ') # must be running `bundle update`
+
     bundler_version = nil
     update_index = nil
     ARGV.each_with_index do |a, i|
       bundler_version = a if update_index && update_index.succ == i && a =~ Gem::Version::ANCHORED_VERSION_PATTERN
+      bundler_version = a if update_index && update_index.succ == i && a =~ Gem::Version::ANCHORED_VERSION_PATTERN
       next unless a =~ /\A--bundler(?:[= ](#{Gem::Version::VERSION_PATTERN}))?\z/
+
+      bundler_version = Regexp.last_match(1)
 
       bundler_version = Regexp.last_match(1)
       update_index = i
@@ -41,14 +49,17 @@ m = Module.new do
 
   def gemfile
     gemfile = ENV.fetch('BUNDLE_GEMFILE', nil)
+    gemfile = ENV.fetch('BUNDLE_GEMFILE', nil)
     return gemfile if gemfile && !gemfile.empty?
 
+    File.expand_path('../Gemfile', __dir__)
     File.expand_path('../Gemfile', __dir__)
   end
 
   def lockfile
     lockfile =
       case File.basename(gemfile)
+      when 'gems.rb' then gemfile.sub(/\.rb$/, '.locked')
       when 'gems.rb' then gemfile.sub(/\.rb$/, '.locked')
       else "#{gemfile}.lock"
       end
@@ -58,8 +69,10 @@ m = Module.new do
   def lockfile_version
     return unless File.file?(lockfile)
 
+
     lockfile_contents = File.read(lockfile)
     return unless lockfile_contents =~ /\n\nBUNDLED WITH\n\s{2,}(#{Gem::Version::VERSION_PATTERN})\n/
+
 
     Regexp.last_match(1)
   end
@@ -88,10 +101,16 @@ m = Module.new do
   def activate_bundler
     gem_error = activation_error_handling do
       gem 'bundler', bundler_requirement
+      gem 'bundler', bundler_requirement
     end
     return if gem_error.nil?
 
+
     require_error = activation_error_handling do
+      require 'bundler/version'
+    end
+    if require_error.nil? && Gem::Requirement.new(bundler_requirement).satisfied_by?(Gem::Version.new(Bundler::VERSION))
+      return
       require 'bundler/version'
     end
     if require_error.nil? && Gem::Requirement.new(bundler_requirement).satisfied_by?(Gem::Version.new(Bundler::VERSION))
@@ -114,4 +133,5 @@ end
 
 m.load_bundler!
 
+load Gem.bin_path('bundler', 'bundle') if m.invoked_as_script?
 load Gem.bin_path('bundler', 'bundle') if m.invoked_as_script?
