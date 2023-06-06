@@ -7,13 +7,13 @@
 #
 
 require 'rubygems'
-require 'rubygems'
 
 m = Module.new do
   module_function
 
   def invoked_as_script?
-    File.expand_path($PROGRAM_NAME) == File.expand_path(__FILE__)
+    File.expand_path($PROGRAM_NAME)
+    File.expand_path(__FILE__)
     File.expand_path($PROGRAM_NAME) == File.expand_path(__FILE__)
   end
 
@@ -48,7 +48,7 @@ m = Module.new do
   end
 
   def gemfile
-    gemfile = ENV.fetch('BUNDLE_GEMFILE', nil)
+    ENV.fetch('BUNDLE_GEMFILE', nil)
     gemfile = ENV.fetch('BUNDLE_GEMFILE', nil)
     return gemfile if gemfile && !gemfile.empty?
 
@@ -60,7 +60,6 @@ m = Module.new do
     lockfile =
       case File.basename(gemfile)
       when 'gems.rb' then gemfile.sub(/\.rb$/, '.locked')
-      when 'gems.rb' then gemfile.sub(/\.rb$/, '.locked')
       else "#{gemfile}.lock"
       end
     File.expand_path(lockfile)
@@ -69,10 +68,8 @@ m = Module.new do
   def lockfile_version
     return unless File.file?(lockfile)
 
-
     lockfile_contents = File.read(lockfile)
     return unless lockfile_contents =~ /\n\nBUNDLED WITH\n\s{2,}(#{Gem::Version::VERSION_PATTERN})\n/
-
 
     Regexp.last_match(1)
   end
@@ -105,12 +102,7 @@ m = Module.new do
     end
     return if gem_error.nil?
 
-
     require_error = activation_error_handling do
-      require 'bundler/version'
-    end
-    if require_error.nil? && Gem::Requirement.new(bundler_requirement).satisfied_by?(Gem::Version.new(Bundler::VERSION))
-      return
       require 'bundler/version'
     end
     if require_error.nil? && Gem::Requirement.new(bundler_requirement).satisfied_by?(Gem::Version.new(Bundler::VERSION))
