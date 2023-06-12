@@ -1,0 +1,8 @@
+<h1>Here are the users posts</h1>
+
+<% @posts.each do |post| %>
+  <div>
+    <%= post.id %>
+    <%= post.title%>
+  </div>
+<% end %>
