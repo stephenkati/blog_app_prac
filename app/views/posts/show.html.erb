@@ -15,6 +15,10 @@
   </div>
 
   <div class="comments">
+    <%= link_to "Add Comment", new_user_post_comment_path(@post.author.id, @post.id) %>
+    <%= form_with url: user_post_likes_path(@post.author.id, @post.id) do |form| %>
+      <%= form.submit 'Like' %>
+    <% end %>
     <% @comments = Post.find(@post.id).comments %>
     <% @comments.each do |comment| %>
       <%= render "comments", comment: comment %>

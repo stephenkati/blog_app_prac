@@ -6,6 +6,7 @@
   <%= render "users/posts", post: post %>
 
   <div class="comments">
+    <%= link_to "Add Comment", new_user_post_comment_path(@user, post) %>
     <% @recent_comments = post.latest_five_comments %>
     <% @recent_comments.each do |comment| %>
       <%= render "comments", comment: comment %>
