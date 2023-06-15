@@ -1,1 +1,15 @@
-<h1>This is the user info</h1>
+<div class="show-user">
+  <h1>This is the user info</h1>
+  <%= render "profile", user: @user %>
+
+  <div class="bio">
+    <h4>Bio</h4>
+    <p><%= @user.bio %></p>
+  </div>
+
+  <% @recent_posts.each do |post| %>
+    <%= render "posts", post: post %>
+  <% end %>
+
+  <a href="/users/<%=@user.id%>/posts">See all Posts</a>
+</div>
