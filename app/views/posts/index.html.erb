@@ -1,8 +1,15 @@
 <h1>Here are the users posts</h1>
 
+<%= render "users/profile", user: @user %>
+
 <% @posts.each do |post| %>
-  <div>
-    <%= post.id %>
-    <%= post.title%>
+  <%= render "users/posts", post: post %>
+
+  <div class="comments">
+    <% @recent_comments = post.latest_five_comments %>
+    <% @recent_comments.each do |comment| %>
+      <%= render "comments", comment: comment %>
+    <% end %>
   </div>
+
 <% end %>

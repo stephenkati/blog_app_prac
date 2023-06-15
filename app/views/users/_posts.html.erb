@@ -1,0 +1,10 @@
+<div class="posts">
+  <a href="/users/<%=@user.id%>/posts/<%=post.id%>">
+    <h3><%= post.title %></h3>
+    <p><%= post.text.truncate(80) %></p>
+    <span>
+      Comments: <%= post.comments_counter %>
+      Likes: <%= post.likes_counter %>
+    </span>
+  </a>
+</div>

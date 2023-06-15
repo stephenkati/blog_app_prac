@@ -1,2 +1,23 @@
-<h1>Here is the post</h1>
+<section class="center">
+  <div class="posts">
+    <div class="show-header">
+      <h3>
+        <%= @post.title %> by <%= @post.author.name %>
+      </h3>
 
+      <span>
+        Comments: <%= @post.comments_counter %>
+        Likes: <%= @post.likes_counter %>
+      </span>
+    </div>
+
+    <%= @post.text %>
+  </div>
+
+  <div class="comments">
+    <% @comments = Post.find(@post.id).comments %>
+    <% @comments.each do |comment| %>
+      <%= render "comments", comment: comment %>
+    <% end %>
+  </div>
+</section>
