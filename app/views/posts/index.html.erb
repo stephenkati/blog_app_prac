@@ -2,7 +2,7 @@
 
 <%= render "users/profile", user: @user %>
 
-<% @posts.each do |post| %>
+<% @posts.includes(:author).each do |post| %>
   <%= render "users/posts", post: post %>
 
   <div class="comments">
