@@ -10,10 +10,10 @@ M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&
 sophie_photo = 'https://images.unsplash.com/photo-1500522144261-ea64433bbe27?ixlib=rb-4.0.3&ixid=
 M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80'
 
-first_user = User.create(name: 'Tom', photo: tom_photo, bio: 'Teacher from Mexico.')
-second_user = User.create(name: 'Lilly', photo: lilly_photo, bio: 'Teacher from Poland.')
-third_user = User.create(name: 'John', photo: john_photo, bio: 'Engineer from the United States.')
-fourth_user = User.create(name: 'Sophie', photo: sophie_photo, bio: 'Artist from France.')
+first_user = User.create(name: 'Tom', photo: tom_photo, bio: 'Teacher from Mexico.', email: 'Tom@gmail.com')
+second_user = User.create(name: 'Lilly', photo: lilly_photo, bio: 'Teacher from Poland.', email: 'Lilly@gmail.com')
+third_user = User.create(name: 'John', photo: john_photo, bio: 'Engineer from the United States.', email: 'John@gmail.com')
+fourth_user = User.create(name: 'Sophie', photo: sophie_photo, bio: 'Artist from France.', email: 'Sophie@gmail.com')
 
 first_post = Post.create(author_id: first_user.id, title: 'Hello', text: 'This is my first post.')
 second_post = Post.create(author_id: second_user.id, title: 'Greetings', text: 'This is my first post as well.')

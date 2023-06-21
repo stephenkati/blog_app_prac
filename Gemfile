@@ -78,3 +78,6 @@ gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
 
 #controller testing
 gem 'rails-controller-testing'
+
+#devise
+gem 'devise'
