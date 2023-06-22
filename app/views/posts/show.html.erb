@@ -10,9 +10,10 @@
         Likes: <%= @post.likes_counter %>
       </span>
     </div>
-
     <%= @post.text %>
   </div>
+
+    <%= button_to "Delete", user_post_path(@user, @post), method: :delete if can? :destroy, @post%>
 
   <div class="comments">
     <%= link_to "Add Comment", new_user_post_comment_path(@post.author.id, @post.id) %>
@@ -22,6 +23,7 @@
     <% @comments = Post.find(@post.id).comments %>
     <% @comments.each do |comment| %>
       <%= render "comments", comment: comment %>
+      <%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete if can? :delete, Comment%>
     <% end %>
   </div>
 </section>

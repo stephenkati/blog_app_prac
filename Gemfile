@@ -81,3 +81,6 @@ gem 'rails-controller-testing'
 
 #devise
 gem 'devise'
+
+# cancancan
+gem 'cancancan'
