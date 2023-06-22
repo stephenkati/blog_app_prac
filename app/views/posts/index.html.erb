@@ -1,6 +1,7 @@
 <h1>Here are the users posts</h1>
 
 <%= render "users/profile", user: @user %>
+<%= link_to 'New Post', new_user_post_path(@user) if can? :create, Post%>
 
 <% @posts.includes(:author).each do |post| %>
   <%= render "users/posts", post: post %>
